@@ -1,0 +1,6 @@
+media/
+virt/
+static/
+social/__pycache__
+Plantar/__pycache__
+db.sqlite3

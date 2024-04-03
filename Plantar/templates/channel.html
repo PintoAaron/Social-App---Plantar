@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class= "container text text-center" >
+     <div class = "row" >
+         <div class = "col-8">
+<h1>{{channel.name|upper}}'S PAGE </h1>
+<br/><br/>
+{% if channel_posts %}
+     {% for post in channel_posts %}
+        <div class="alert alert-secondary" role="alert">
+             {{post.body}}<br/>
+             <small class = "text-muted">
+               {{post.create_at}} By @{{post.author.username}}
+             </small>
+             
+        </div><br/><br/>  
+     {% endfor %}
+{% endif %}
+
+</div>
+<div class= "col-4">
+     <br/><br/><br/><br/>
+
+     {% if form %}
+     <form method=POST>
+          {% csrf_token%}
+          {{form.as_p}}
+         
+          <button type="submit" class="btn btn-secondary">Post To Channel</button>
+        </form>
+
+     {% endif %} 
+</div>
+{% endblock %}

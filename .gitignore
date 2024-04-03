@@ -1,0 +1,7 @@
+virt
+/media/
+/static/
+.env
+__pycache__
+db.sqlite3
+Plantar/static
