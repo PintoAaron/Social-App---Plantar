@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.models import User
 from.models import Profile,Plant,Channel,ChannelPost
 from .forms import PlantForm,RegisterForm,ChannelPostForm
 
@@ -119,4 +120,20 @@ def channel(request,id):
         channel_posts = ChannelPost.objects.filter(channel_id = id).order_by('-create_at')
         context = {'channel':current_channel,'channel_posts':channel_posts,'form':form}
         return render(request,'channel.html',context)
+
+
+
+def update_user(request):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(pk = request.user.id)
+        form = RegisterForm(request.POST or None,instance = current_user)
+        if form.is_valid():
+            form.save()
+            login(request,current_user)
+            messages.success(request,"Your Profile has being updated")
+            return redirect('home')
+        return render(request,'update_user.html',{'form':form})
+    else:
+        messages.success(request,"Please log in to view this Page")
+        return redirect('home')
     

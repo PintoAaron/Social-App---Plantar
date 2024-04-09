@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'db',  # This should match the service name for postgres in your Docker Compose file
+        'HOST': os.getenv('POSTGRES_HOST'),
         'PORT': '5432',
     }
 }
