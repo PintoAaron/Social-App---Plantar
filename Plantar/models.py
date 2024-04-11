@@ -31,7 +31,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     follows = models.ManyToManyField("self",related_name="followed_by",symmetrical=False,blank=True)
     date_modefied = models.DateTimeField(User,auto_now= True)
-    subscribed_channels = models.ManyToManyField(Channel,related_name='subscribers',symmetrical=False,blank=True) 
+    subscribed_channels = models.ManyToManyField(Channel,related_name='subscribers',symmetrical=False,blank=True)
+    profile_image = models.ImageField(null=True, blank=True,upload_to='profiles/')
     
     def __str__(self) -> str:
         return self.user.username
